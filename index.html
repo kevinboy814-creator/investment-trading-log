@@ -24,7 +24,7 @@ svg{width:100%;height:100%;display:block}
 .event.sell{border-color:#ef6666}
 .event.stop{border-color:#ee875b}
 .event strong{display:inline-block;min-width:76px}
-.note{font-size:12px;color:#7fa18e;margin-top:8px;line-height:1.6}.disclaimer{margin-top:14px;padding:10px 12px;border:1px solid #2a4c39;background:#0f2118;border-radius:10px;color:#7f9b8c;font-size:11px;line-height:1.65}
+.note{font-size:12px;color:#7fa18e;margin-top:8px;line-height:1.6}.disclaimer{margin-top:14px;padding:10px 12px;border:1px solid #2a4c39;background:#0f2118;border-radius:10px;color:#ffffff;font-size:12px;font-weight:700;line-height:1.7}
 @media(max-width:600px){
   .wrap{padding:12px 8px 35px}
   h1{font-size:20px}
@@ -114,21 +114,59 @@ function validVals(arr,a,z){
 
 function draw(){
   svg.innerHTML='';
-  const W=wrap.clientWidth,H=wrap.clientHeight,p={l:44,r:12,t:24,b:35};
+  const W=wrap.clientWidth,H=wrap.clientHeight,p={l:44,r:12,t:24,b:42};
   const [a,z]=idxs();
+
   let ys=[];
   visible.forEach(k=>ys.push(...validVals(data[k],a,z)));
-  if(!ys.length) ys=[90,110];
-  const ymin=Math.min(...ys)-3, ymax=Math.max(...ys)+3;
+  if(!ys.length) ys=[100];
+
+  // Y 軸：以 100 為基準，固定每 10 一階。
+  let rawMin=Math.min(...ys), rawMax=Math.max(...ys);
+  let ymin=Math.floor(Math.min(rawMin,100)/10)*10;
+  let ymax=Math.ceil(Math.max(rawMax,100)/10)*10;
+  if(ymin===ymax){ ymin-=10; ymax+=10; }
+
   const X=i=>p.l+(i-a)/Math.max(1,(z-a))*(W-p.l-p.r);
   const Y=v=>p.t+(ymax-v)/(ymax-ymin)*(H-p.t-p.b);
 
-  for(let j=0;j<5;j++){
-    const y=p.t+j*(H-p.t-p.b)/4;
-    svg.appendChild(el('line',{x1:p.l,x2:W-p.r,y1:y,y2:y,stroke:'#244533'}));
-    const t=el('text',{x:4,y:y+4,fill:'#789b87','font-size':10});
-    t.textContent=(ymax-j*(ymax-ymin)/4).toFixed(0);
+  // 水平格線與 Y 軸刻度，每 10 一階；100 強調。
+  for(let v=ymin;v<=ymax;v+=10){
+    const y=Y(v);
+    svg.appendChild(el('line',{
+      x1:p.l,x2:W-p.r,y1:y,y2:y,
+      stroke:v===100?'#4f7d65':'#244533',
+      'stroke-width':v===100?1.6:1
+    }));
+    const t=el('text',{
+      x:4,y:y+4,
+      fill:v===100?'#d8eee2':'#789b87',
+      'font-size':10,
+      'font-weight':v===100?700:400
+    });
+    t.textContent=v;
     svg.appendChild(t);
+  }
+
+  // X 軸月份：標在當月第一個可見交易日。
+  let lastMonth='';
+  for(let i=a;i<=z;i++){
+    const month=data.dates[i].slice(0,7);
+    if(month!==lastMonth){
+      const x=X(i);
+      svg.appendChild(el('line',{
+        x1:x,x2:x,y1:p.t,y2:H-p.b,
+        stroke:'#1d382a','stroke-width':1
+      }));
+      const t=el('text',{
+        x:Math.min(x+3,W-p.r-28),
+        y:H-10,
+        fill:'#789b87','font-size':10
+      });
+      t.textContent=String(Number(month.slice(5,7)))+'月';
+      svg.appendChild(t);
+      lastMonth=month;
+    }
   }
 
   visible.forEach(k=>{
@@ -138,7 +176,14 @@ function draw(){
       if(Number.isFinite(v)) pts.push(`${X(i)},${Y(v)}`);
     }
     if(pts.length>1){
-      svg.appendChild(el('polyline',{points:pts.join(' '),fill:'none',stroke:C[k],'stroke-width':k==='0050'?2.6:2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+      svg.appendChild(el('polyline',{
+        points:pts.join(' '),
+        fill:'none',
+        stroke:C[k],
+        'stroke-width':k==='0050'?2.6:2.2,
+        'stroke-linejoin':'round',
+        'stroke-linecap':'round'
+      }));
     }
   });
 
