@@ -54,7 +54,7 @@ svg{width:100%;height:100%;display:block}
   <div class="disclaimer">本頁為個人資產配置與交易紀錄，僅供個人紀錄及經驗分享，不構成任何金融商品之推薦、招攬、投資建議或獲利保證。圖表所示為各市場標的之相對走勢與個人操作時點，非本人投資組合之實際報酬率。</div>
 
   <div class="card">
-    <h3>操作紀錄</h3>
+    <h3>操作紀錄</h3><div class="note" style="margin-top:-4px;margin-bottom:10px">事件下方顯示各標的相對於當時之前區間高點的回撤幅度。</div>
     <div id="events"></div>
   </div>
 </div>
@@ -154,6 +154,18 @@ function updateAnalytics(){
     </div>`;
   }).join('');
 }
+
+function drawdownFromPriorHigh(k,i){
+  let peak=null;
+  for(let j=0;j<=i;j++){
+    const v=data[k][j];
+    if(Number.isFinite(v) && (peak===null || v>peak)) peak=v;
+  }
+  const v=data[k][i];
+  if(!Number.isFinite(v) || peak===null) return null;
+  return (v/peak-1)*100;
+}
+
 function marketSnapshotAt(date){
   let i=data.dates.indexOf(date);
   if(i<0){
@@ -168,7 +180,8 @@ function marketSnapshotAt(date){
   return Object.keys(C).map(k=>{
     const v=data[k][i];
     if(!Number.isFinite(v)) return `${k}：休市`;
-    return `${k}：${v.toFixed(2)}（${signed(v-100)}）`;
+    const dd=drawdownFromPriorHigh(k,i);
+    return `${k}：距前高 ${signed(dd)}`;
   }).join('｜');
 }
 
