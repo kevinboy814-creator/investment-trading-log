@@ -18,12 +18,12 @@ button.active{background:#55d5a6;color:#092016}
 svg{width:100%;height:100%;display:block}
 #tip{position:absolute;display:none;pointer-events:none;min-width:190px;background:rgba(8,22,15,.97);border:1px solid #4d8065;border-radius:10px;padding:10px;font-size:12px;z-index:4;box-shadow:0 8px 24px #0008}
 #tip b{color:#65ddb1}
-.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;margin-top:5px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;margin-top:5px}.analytics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:10px 0 4px}.metric{background:#0f2118;border:1px solid #274735;border-radius:10px;padding:8px 9px;min-width:0}.metric .name{font-size:11px;color:#89a895;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric .ret{font-size:14px;font-weight:800;margin-top:2px}.metric .dd{font-size:10px;color:#9bb2a5;margin-top:2px}@media(max-width:700px){.analytics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px}
 .event{border-left:3px solid #55d5a6;padding:10px 12px;margin:8px 0;background:#102218;border-radius:8px}
 .event.sell{border-color:#ef6666}
 .event.stop{border-color:#ee875b}
-.event strong{display:inline-block;min-width:76px}
+.event strong{display:inline-block;min-width:76px}.event-market{margin-top:7px;font-size:11px;color:#9db4a7;line-height:1.55}
 .note{font-size:12px;color:#7fa18e;margin-top:8px;line-height:1.6}.disclaimer{margin-top:14px;padding:10px 12px;border:1px solid #2a4c39;background:#0f2118;border-radius:10px;color:#ffffff;font-size:12px;font-weight:700;line-height:1.7}
 @media(max-width:600px){
   .wrap{padding:12px 8px 35px}
@@ -42,6 +42,7 @@ svg{width:100%;height:100%;display:block}
   <div class="card">
     <div class="toolbar" id="seriesBtns"></div>
     <div class="toolbar" id="rangeBtns"></div>
+    <div class="analytics" id="analytics"></div>
     <div id="chartWrap">
       <svg id="chart"></svg>
       <div id="tip"></div>
@@ -110,6 +111,65 @@ function idxs(){
 
 function validVals(arr,a,z){
   return arr.slice(a,z+1).filter(v=>Number.isFinite(v));
+}
+
+
+function firstFiniteIndex(k,a,z){
+  for(let i=a;i<=z;i++) if(Number.isFinite(data[k][i])) return i;
+  return -1;
+}
+function lastFiniteIndex(k,a,z){
+  for(let i=z;i>=a;i--) if(Number.isFinite(data[k][i])) return i;
+  return -1;
+}
+function periodReturn(k,a,z){
+  const i0=firstFiniteIndex(k,a,z), i1=lastFiniteIndex(k,a,z);
+  if(i0<0||i1<0||i0===i1) return null;
+  return (data[k][i1]/data[k][i0]-1)*100;
+}
+function maxDrawdown(k,a,z){
+  let peak=null, mdd=0;
+  for(let i=a;i<=z;i++){
+    const v=data[k][i];
+    if(!Number.isFinite(v)) continue;
+    if(peak===null||v>peak) peak=v;
+    const dd=(v/peak-1)*100;
+    if(dd<mdd) mdd=dd;
+  }
+  return mdd;
+}
+function signed(v,d=2){
+  if(v===null||!Number.isFinite(v)) return '—';
+  return `${v>=0?'+':''}${v.toFixed(d)}%`;
+}
+function updateAnalytics(){
+  const [a,z]=idxs();
+  const box=document.getElementById('analytics');
+  box.innerHTML=Object.keys(C).filter(k=>visible.has(k)).map(k=>{
+    const r=periodReturn(k,a,z), dd=maxDrawdown(k,a,z);
+    return `<div class="metric">
+      <div class="name"><span style="color:${C[k]}">●</span> ${k}</div>
+      <div class="ret" style="color:${r>=0?'#72ddb4':'#ef7a7a'}">${signed(r)}</div>
+      <div class="dd">最大回撤 ${signed(dd)}</div>
+    </div>`;
+  }).join('');
+}
+function marketSnapshotAt(date){
+  let i=data.dates.indexOf(date);
+  if(i<0){
+    const target=new Date(date);
+    let best=-1,bestDiff=Infinity;
+    data.dates.forEach((d,idx)=>{
+      const diff=Math.abs(new Date(d)-target);
+      if(diff<bestDiff){bestDiff=diff;best=idx;}
+    });
+    i=best;
+  }
+  return Object.keys(C).map(k=>{
+    const v=data[k][i];
+    if(!Number.isFinite(v)) return `${k}：休市`;
+    return `${k}：${v.toFixed(2)}（${signed(v-100)}）`;
+  }).join('｜');
 }
 
 function draw(){
@@ -207,6 +267,7 @@ function draw(){
   const cross=el('line',{id:'cross',x1:0,x2:0,y1:p.t,y2:H-p.b,stroke:'#d9eee3','stroke-width':1,'stroke-dasharray':'3 3',visibility:'hidden'});
   svg.appendChild(cross);
   svg.dataset.a=a;svg.dataset.z=z;svg.dataset.pl=p.l;svg.dataset.pr=p.r;
+  updateAnalytics();
 }
 
 function inspect(clientX){
@@ -221,7 +282,7 @@ function inspect(clientX){
 
   const rows=[...visible].map(k=>{
     const v=data[k][i];
-    return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${Number.isFinite(v)?v.toFixed(2):'—'}</b></div>`;
+    return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${Number.isFinite(v)?v.toFixed(2):'—'}</b>${Number.isFinite(v)?` <span style="color:${v>=100?'#72ddb4':'#ef7a7a'}">(${signed(v-100)})</span>`:''}</div>`;
   }).join('');
 
   const ev=data.events.find(e=>e.date===data.dates[i]);
@@ -241,7 +302,7 @@ wrap.addEventListener('touchstart',e=>inspect(e.touches[0].clientX),{passive:tru
 wrap.addEventListener('touchmove',e=>inspect(e.touches[0].clientX),{passive:true});
 
 function renderEvents(){
-  document.getElementById('events').innerHTML=data.events.map(e=>`<div class="event ${e.type==='減碼'?'sell':e.type==='停止加碼'?'stop':''}"><strong>${e.date}</strong><b style="color:${e.color}">${e.type}</b><div>${e.note}</div></div>`).join('');
+  document.getElementById('events').innerHTML=data.events.map(e=>`<div class="event ${e.type==='減碼'?'sell':e.type==='停止加碼'?'stop':''}"><strong>${e.date}</strong><b style="color:${e.color}">${e.type}</b><div>${e.note}</div><div class="event-market">${marketSnapshotAt(e.date)}</div></div>`).join('');
 }
 function legend(){
   document.getElementById('legend').innerHTML=Object.keys(C).map(k=>`<span><i class="dot" style="background:${C[k]}"></i>${k}</span>`).join('');
