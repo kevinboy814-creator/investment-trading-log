@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>個人操作時機 × 市場走勢</title>
+<title>個人資產部位 × 市場走勢</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b1711;color:#d6e5dc;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}
@@ -24,7 +24,7 @@ svg{width:100%;height:100%;display:block}
 .event.sell{border-color:#ef6666}
 .event.stop{border-color:#ee875b}
 .event strong{display:inline-block;min-width:76px}
-.note{font-size:12px;color:#7fa18e;margin-top:8px;line-height:1.6}
+.note{font-size:12px;color:#7fa18e;margin-top:8px;line-height:1.6}.disclaimer{margin-top:14px;padding:10px 12px;border:1px solid #2a4c39;background:#0f2118;border-radius:10px;color:#7f9b8c;font-size:11px;line-height:1.65}
 @media(max-width:600px){
   .wrap{padding:12px 8px 35px}
   h1{font-size:20px}
@@ -36,8 +36,8 @@ svg{width:100%;height:100%;display:block}
 </head>
 <body>
 <div class="wrap">
-  <h1>📊 個人操作時機 × 市場走勢</h1>
-  <div class="sub">2026/02 – 2026/08｜標準化至 100（基準：2026-02-02）</div>
+  <h1>📊 個人資產部位 × 市場走勢</h1>
+  <div class="sub">個人操作時點與主要持有資產之相對市場表現｜2026/02 – 2026/08｜基準 = 100（2026-02-02）</div>
 
   <div class="card">
     <div class="toolbar" id="seriesBtns"></div>
@@ -49,6 +49,8 @@ svg{width:100%;height:100%;display:block}
     <div class="legend" id="legend"></div>
     <div class="note">手機：手指在圖上左右拖曳查看最近交易日；上下拖曳仍可捲動頁面。0050 使用你提供的 Yahoo 財經「調整後收市價」並以 2026-02-02 = 100 標準化；台股休市日不視為資料缺漏，0050 會直接連接前後實際交易日；不插值、不虛構價格。</div>
   </div>
+
+  <div class="disclaimer">本頁為個人資產配置與交易紀錄，僅供個人紀錄及經驗分享，不構成任何金融商品之推薦、招攬、投資建議或獲利保證。圖表所示為各市場標的之相對走勢與個人操作時點，非本人投資組合之實際報酬率。</div>
 
   <div class="card">
     <h3>操作紀錄</h3>
