@@ -47,7 +47,7 @@ svg{width:100%;height:100%;display:block}
       <div id="tip"></div>
     </div>
     <div class="legend" id="legend"></div>
-    <div class="note">手機：手指在圖上左右拖曳查看最近交易日；上下拖曳仍可捲動頁面。0050 使用你提供的 Yahoo 財經「調整後收市價」並以 2026-02-02 = 100 標準化；截圖未顯示的少數交易日會留白，不自行補值。</div>
+    <div class="note">手機：手指在圖上左右拖曳查看最近交易日；上下拖曳仍可捲動頁面。0050 使用你提供的 Yahoo 財經「調整後收市價」並以 2026-02-02 = 100 標準化；台股休市日不視為資料缺漏，0050 會直接連接前後實際交易日；不插值、不虛構價格。</div>
   </div>
 
   <div class="card">
@@ -130,19 +130,14 @@ function draw(){
   }
 
   visible.forEach(k=>{
-    let seg=[];
-    const flush=()=>{
-      if(seg.length>1){
-        svg.appendChild(el('polyline',{points:seg.join(' '),fill:'none',stroke:C[k],'stroke-width':k==='0050'?2.6:2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
-      }
-      seg=[];
-    };
+    const pts=[];
     for(let i=a;i<=z;i++){
       const v=data[k][i];
-      if(Number.isFinite(v)) seg.push(`${X(i)},${Y(v)}`);
-      else flush();
+      if(Number.isFinite(v)) pts.push(`${X(i)},${Y(v)}`);
     }
-    flush();
+    if(pts.length>1){
+      svg.appendChild(el('polyline',{points:pts.join(' '),fill:'none',stroke:C[k],'stroke-width':k==='0050'?2.6:2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    }
   });
 
   data.events.forEach(e=>{
