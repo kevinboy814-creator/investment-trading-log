@@ -34,7 +34,7 @@ svg{width:100%;height:100%;display:block}
 }
 </style>
 </head>
-<body>
+<body data-version="2026-08-17-event-drawdown-v2">
 <div class="wrap">
   <h1>📊 個人資產部位 × 市場走勢</h1>
   <div class="sub">個人操作時點與主要持有資產之相對市場表現｜2026/02 – 2026/08｜基準 = 100（2026-02-02）</div>
@@ -54,7 +54,7 @@ svg{width:100%;height:100%;display:block}
   <div class="disclaimer">本頁為個人資產配置與交易紀錄，僅供個人紀錄及經驗分享，不構成任何金融商品之推薦、招攬、投資建議或獲利保證。圖表所示為各市場標的之相對走勢與個人操作時點，非本人投資組合之實際報酬率。</div>
 
   <div class="card">
-    <h3>操作紀錄</h3><div class="note" style="margin-top:-4px;margin-bottom:10px">事件下方顯示各標的「事件當時距前高」，並標示該前高日期；每筆只使用事件日前已完成的交易資料計算，之後創新高不會改變舊事件。</div>
+    <h3>操作紀錄</h3><div class="note" style="margin-top:-4px;margin-bottom:10px">事件日 Tooltip 與操作紀錄皆顯示「事件當時距前高」；前高只取事件日前已完成的交易資料，並標示前高日期。</div>
     <div id="events"></div>
   </div>
 </div>
@@ -160,8 +160,6 @@ function drawdownFromPriorHigh(k,i){
   if(!Number.isFinite(eventValue)) return null;
 
   let peakValue=null, peakIndex=-1;
-
-  // 只看事件日前已經完成的交易資料，找出當時最高點。
   for(let j=0;j<i;j++){
     const v=data[k][j];
     if(Number.isFinite(v) && (peakValue===null || v>peakValue)){
@@ -197,10 +195,8 @@ function marketSnapshotAt(date){
   return Object.keys(C).map(k=>{
     const v=data[k][i];
     if(!Number.isFinite(v)) return `${k}：休市`;
-
     const snap=drawdownFromPriorHigh(k,i);
     if(!snap) return `${k}：—`;
-
     const peakLabel=snap.peakDate.slice(5).replace('-','/');
     return `${k}：距 ${peakLabel} 前高 ${signed(snap.dd)}`;
   }).join('｜');
@@ -315,18 +311,20 @@ function inspect(clientX){
   cross.setAttribute('x1',cx);cross.setAttribute('x2',cx);cross.setAttribute('visibility','visible');
 
   const ev=data.events.find(e=>e.date===data.dates[i]);
+
   const rows=[...visible].map(k=>{
     const v=data[k][i];
     if(!Number.isFinite(v)){
       return `<div><span style="color:${C[k]}">●</span> ${k}：<b>—</b></div>`;
     }
+
     if(ev){
       const snap=drawdownFromPriorHigh(k,i);
-      const dd=snap && typeof snap==='object' ? snap.dd : snap;
-      const peakDate=snap && typeof snap==='object' ? snap.peakDate : null;
-      const peakLabel=peakDate ? peakDate.slice(5).replace('-','/') : '';
-      return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:#efb36b">距${peakLabel?` ${peakLabel}`:''}前高 ${signed(dd)}</span></div>`;
+      const peakLabel=snap ? snap.peakDate.slice(5).replace('-','/') : '';
+      const dd=snap ? snap.dd : null;
+      return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:#efb36b">｜距 ${peakLabel} 前高 ${signed(dd)}</span></div>`;
     }
+
     return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:${v>=100?'#72ddb4':'#ef7a7a'}">(${signed(v-100)})</span></div>`;
   }).join('');
 
