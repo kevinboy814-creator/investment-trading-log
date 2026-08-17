@@ -54,7 +54,7 @@ svg{width:100%;height:100%;display:block}
   <div class="disclaimer">本頁為個人資產配置與交易紀錄，僅供個人紀錄及經驗分享，不構成任何金融商品之推薦、招攬、投資建議或獲利保證。圖表所示為各市場標的之相對走勢與個人操作時點，非本人投資組合之實際報酬率。</div>
 
   <div class="card">
-    <h3>操作紀錄</h3><div class="note" style="margin-top:-4px;margin-bottom:10px">事件下方顯示各標的「事件當時距前高」；每筆數字只使用該事件當日及以前資料計算，之後即使再創新高也不會回頭改變。</div>
+    <h3>操作紀錄</h3><div class="note" style="margin-top:-4px;margin-bottom:10px">事件下方顯示各標的「事件當時距前高」，並標示該前高日期；每筆只使用事件日前已完成的交易資料計算，之後創新高不會改變舊事件。</div>
     <div id="events"></div>
   </div>
 </div>
@@ -156,17 +156,30 @@ function updateAnalytics(){
 }
 
 function drawdownFromPriorHigh(k,i){
-  const v=data[k][i];
-  if(!Number.isFinite(v)) return null;
-  let peak=null;
-  // 前高只看「事件日前」已經存在的價格；事件當日不拿來抬高自己的基準。
+  const eventValue=data[k][i];
+  if(!Number.isFinite(eventValue)) return null;
+
+  let peakValue=null, peakIndex=-1;
+
+  // 只看事件日前已經完成的交易資料，找出當時最高點。
   for(let j=0;j<i;j++){
-    const x=data[k][j];
-    if(Number.isFinite(x) && (peak===null || x>peak)) peak=x;
+    const v=data[k][j];
+    if(Number.isFinite(v) && (peakValue===null || v>peakValue)){
+      peakValue=v;
+      peakIndex=j;
+    }
   }
-  // 如果事件剛好是資料起始日，退而使用事件當日作基準。
-  if(peak===null) peak=v;
-  return (v/peak-1)*100;
+
+  if(peakValue===null){
+    peakValue=eventValue;
+    peakIndex=i;
+  }
+
+  return {
+    dd:(eventValue/peakValue-1)*100,
+    peakValue,
+    peakDate:data.dates[peakIndex]
+  };
 }
 
 function marketSnapshotAt(date){
@@ -180,11 +193,16 @@ function marketSnapshotAt(date){
     });
     i=best;
   }
+
   return Object.keys(C).map(k=>{
     const v=data[k][i];
     if(!Number.isFinite(v)) return `${k}：休市`;
-    const dd=drawdownFromPriorHigh(k,i);
-    return `${k}：事件當時距前高 ${signed(dd)}`;
+
+    const snap=drawdownFromPriorHigh(k,i);
+    if(!snap) return `${k}：—`;
+
+    const peakLabel=snap.peakDate.slice(5).replace('-','/');
+    return `${k}：距 ${peakLabel} 前高 ${signed(snap.dd)}`;
   }).join('｜');
 }
 
@@ -296,12 +314,22 @@ function inspect(clientX){
   const cross=svg.querySelector('#cross');
   cross.setAttribute('x1',cx);cross.setAttribute('x2',cx);cross.setAttribute('visibility','visible');
 
+  const ev=data.events.find(e=>e.date===data.dates[i]);
   const rows=[...visible].map(k=>{
     const v=data[k][i];
-    return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${Number.isFinite(v)?v.toFixed(2):'—'}</b>${Number.isFinite(v)?` <span style="color:${v>=100?'#72ddb4':'#ef7a7a'}">(${signed(v-100)})</span>`:''}</div>`;
+    if(!Number.isFinite(v)){
+      return `<div><span style="color:${C[k]}">●</span> ${k}：<b>—</b></div>`;
+    }
+    if(ev){
+      const snap=drawdownFromPriorHigh(k,i);
+      const dd=snap && typeof snap==='object' ? snap.dd : snap;
+      const peakDate=snap && typeof snap==='object' ? snap.peakDate : null;
+      const peakLabel=peakDate ? peakDate.slice(5).replace('-','/') : '';
+      return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:#efb36b">距${peakLabel?` ${peakLabel}`:''}前高 ${signed(dd)}</span></div>`;
+    }
+    return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:${v>=100?'#72ddb4':'#ef7a7a'}">(${signed(v-100)})</span></div>`;
   }).join('');
 
-  const ev=data.events.find(e=>e.date===data.dates[i]);
   tip.innerHTML=`<b>${data.dates[i]}</b>${rows}${ev?`<hr style="border-color:#294b39"><div style="color:${ev.color}"><b>${ev.type}</b>｜${ev.note}</div>`:''}`;
   tip.style.display='block';
   const left=Math.min(Math.max(6,cx+10),W-tip.offsetWidth-6);
