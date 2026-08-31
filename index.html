@@ -7,11 +7,13 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f3f6f4;color:#20342a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}body.guide-gated #marketSection,body.guide-gated .simulation,body.guide-gated .page-details{display:none}
+body{margin:0;background:#f3f6f4;color:#20342a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif}body.guide-gated #marketSection,body.guide-gated .simulation,body.guide-gated .page-details{display:none}body.guide-focus-market #timelineSection,body.guide-focus-market .simulation,body.guide-focus-market .page-details{display:none}body.guide-focus-timeline #chartSection,body.guide-focus-timeline .simulation,body.guide-focus-timeline .page-details{display:none}body.guide-focus-simulation #marketSection,body.guide-focus-simulation .page-details{display:none}
 .wrap{max-width:1100px;margin:auto;padding:18px 14px 50px}
 h1{font-size:24px;color:#176244;margin:10px 0 3px}
 .sub{color:#587064;font-size:13px}
 .card{background:#fff;border:1px solid #d6e3dc;border-radius:16px;padding:12px;margin-top:14px;box-shadow:0 2px 12px #254c3610}
 .quick-start{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:13px;border:2px solid #76b695;border-radius:15px;background:linear-gradient(135deg,#effbf3,#f8fcf9)}.quick-start-title{min-width:190px}.quick-start-title b{display:block;color:#176244;font-size:16px}.quick-start-title span{display:block;margin-top:3px;color:#385549;font-size:12px;font-weight:700}.guide-status{width:100%;margin:0;color:#176244;font-size:12px;font-weight:800}.quick-actions{display:flex;gap:8px;flex:1;flex-wrap:wrap}.quick-action{flex:1 1 190px;border-radius:11px;border-color:#9dcdb2;background:#fff;padding:11px;text-align:left;box-shadow:0 1px 4px #254c3610}.quick-action b{display:block;color:#176244;font-size:13px}.quick-action small{display:block;margin-top:4px;color:#456457;font-size:11px;font-weight:650;line-height:1.45}.quick-action:nth-child(2){border-color:#9ebee3;background:#f5faff}.quick-action:nth-child(3){border-color:#c9b1e8;background:#fcf9ff}.quick-action:hover{border-color:#237c57;background:#edf8f1;transform:translateY(-1px)}.inline-guide{margin:10px 0 7px;padding:9px 10px;border:1px dashed #7fb594;border-radius:9px;background:#f7fcf8;color:#385549;font-size:11px;line-height:1.5}.inline-guide b{color:#176244}.guide-highlight{outline:3px solid #d6a52a;outline-offset:5px;border-radius:12px;animation:guidePulse 1.1s ease-in-out 2}@keyframes guidePulse{50%{outline-color:#f3d57c}}
+.quick-start{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:13px;border:2px solid #76b695;border-radius:15px;background:linear-gradient(135deg,#effbf3,#f8fcf9)}.quick-start-title{min-width:190px}.quick-start-title b{display:block;color:#176244;font-size:16px}.quick-start-title span{display:block;margin-top:3px;color:#385549;font-size:12px;font-weight:700}.guide-status{width:100%;margin:0;color:#176244;font-size:12px;font-weight:800}.quick-actions{display:flex;gap:8px;flex:1;flex-wrap:wrap}.quick-action{flex:1 1 190px;border-radius:11px;border-color:#9dcdb2;background:#fff;padding:11px;text-align:left;box-shadow:0 1px 4px #254c3610}.quick-action b{display:block;color:#176244;font-size:13px}.quick-action small{display:block;margin-top:4px;color:#456457;font-size:11px;font-weight:650;line-height:1.45}.quick-action:nth-child(2){border-color:#9ebee3;background:#f5faff}.quick-action:nth-child(3){border-color:#c9b1e8;background:#fcf9ff}.quick-action:hover{border-color:#237c57;background:#edf8f1;transform:translateY(-1px)}.show-all{border-color:#7698c5;background:#f2f7ff;color:#315d94;font-size:12px}.inline-guide{margin:10px 0 7px;padding:9px 10px;border:1px dashed #7fb594;border-radius:9px;background:#f7fcf8;color:#385549;font-size:11px;line-height:1.5}.inline-guide b{color:#176244}.guide-highlight{outline:3px solid #d6a52a;outline-offset:5px;border-radius:12px;animation:guidePulse 1.1s ease-in-out 2}@keyframes guidePulse{50%{outline-color:#f3d57c}}
 .usage-guide{margin-top:12px;border:1px solid #bddacb;background:#f8fcf9;border-radius:13px;overflow:hidden}.usage-guide summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;padding:10px 12px;color:#176244;font-weight:850;font-size:14px}.usage-guide summary::-webkit-details-marker{display:none}.usage-guide summary:before{content:'ⓘ';font-size:18px}.usage-guide summary:after{content:'收起  ▴';margin-left:auto;color:#587064;font-size:11px}.usage-guide:not([open]) summary:after{content:'點此查看  ▾'}.usage-guide-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 12px 12px}.usage-step{border:1px solid #d7e7dd;border-radius:10px;background:#fff;padding:9px 10px;min-width:0}.usage-step b{display:block;color:#176244;font-size:12px}.usage-step p{margin:4px 0 0;color:#587064;font-size:11px;line-height:1.55}.usage-step strong{color:#176244}.usage-note{grid-column:1/-1;margin:0;padding:8px 10px;border-radius:9px;background:#eef7f1;color:#587064;font-size:11px;line-height:1.55}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 button{border:1px solid #b9ccc1;background:#fff;color:#456457;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}
@@ -42,7 +44,6 @@ svg{width:100%;height:100%;display:block}
 <div class="wrap">
   <h1>📊 個人資產部位 × 市場走勢</h1>
   <div class="sub">用操作時點回看主要市場部位的相對位置｜2026/02 – 2026/08｜基準 = 100（比較相對漲跌，非實際投資組合報酬）</div>
-
   <section class="quick-start" aria-label="互動式使用導覽">
     <div class="quick-start-title"><b id="quickStartTitle">先花 10 秒，選擇你想怎麼看</b><span id="quickStartSub">先選一個步驟，才會開啟下方完整內容</span></div>
     <div class="guide-status" id="guideStatus">步驟 1：請選擇一個方式開始</div>
@@ -51,9 +52,10 @@ svg{width:100%;height:100%;display:block}
       <button class="quick-action" type="button" data-guide-target="timelineSection"><b>② 我想先看加碼／減碼紀錄</b><small>點選時間軸上的日期，查看當時為何調整，以及原始紀錄圖片。</small></button>
       <button class="quick-action" type="button" data-guide-target="simulation"><b>③ 我想用自己的金額試算</b><small>輸入每月定期定額與短債／防禦資金，查看特定歷史情境下的差異。</small></button>
     </div>
+    <button class="show-all" id="showAllGuides" type="button" hidden>顯示全部內容</button>
   </section>
-
   <div class="card" id="marketSection" tabindex="-1">
+    <div id="chartSection">
     <div class="selector-guide"><span class="icon">☝️</span><div><b>想比較哪幾個標的？</b><span>點一下下方名稱，即可加入或移除圖表</span></div><span id="selectionCount"></span></div>
     <div class="inline-guide"><b>① 先從這裡開始：</b>點選標的即可顯示／隱藏。每個標的都從 <b>100</b> 開始，是統一的價格比較基準；<b>不是投入金額，也不是帳戶報酬。</b></div>
     <div class="toolbar" id="seriesBtns"></div>
@@ -66,11 +68,11 @@ svg{width:100%;height:100%;display:block}
     </div>
     <div class="legend" id="legend"></div>
     <div class="event-key"><i style="background:#52C8A0"></i>加碼 <i style="background:#E05050"></i>減碼 <span>主圖僅標示實際加減碼</span></div>
+    </div>
     <div id="timelineSection" tabindex="-1"><div class="inline-guide"><b>② 操作時間軸：</b>點日期可查看當時說明與原始紀錄。綠色＝加碼、紅色＝減碼、灰色＝策略紀錄。</div><div class="event-key" style="margin-top:10px">操作時間軸（可左右滑動）｜綠＝加碼｜紅＝減碼｜灰＝策略紀錄</div>
     <div class="event-rail" id="eventRail" aria-label="操作時間軸"></div>
     <div class="note">手機：手指在圖上左右拖曳查看最近交易日；上下拖曳仍可捲動頁面。0050 使用你提供的 Yahoo 財經「調整後收市價」並以 2026-02-02 = 100 標準化；台股休市日不視為資料缺漏，0050 會直接連接前後實際交易日；不插值、不虛構價格。</div></div>
   </div>
-
   <details class="simulation" id="simulation">
     <summary><span><b>🧮 個人紀錄情境比較</b><small>歷史資料的假設示例，不代表投資建議</small></span></summary>
     <div class="sim-body">
@@ -91,18 +93,14 @@ svg{width:100%;height:100%;display:block}
       <div class="sim-info"><b>本示例怎麼看？</b><ul><li>兩組皆以相同每月金額定期投入風險資產；差別只在是否依個人當時紀錄，將部分短債資金額外轉入。</li><li>Ｂ組：三月採已確認低標，短債動用 20%；七月按 6 等份規畫，僅計已完成約一半，即當時剩餘資金的 3/6。</li><li>Ａ組：定期定額照常進行，短債資金持有、不額外轉入。短債報酬保守以 0% 計。</li><li>通知型買入使用通知日後第一個可用交易日收盤價；不使用盤中低點、不計未載明加碼，亦未計交易成本與稅費。</li><li>此為單一市場標的的歷史情境示例，不代表本人實際買入標的配比、單位數或投資組合報酬；亦非任何標的、買賣時點或投資組合之推薦。</li></ul></div>
     </div>
   </details>
-
   <details class="page-details" open><summary>重要提醒、資料來源與試算限制</summary><div class="important-note"><b>⚠️ 特別注意事項</b><br>歷史資料與情境結果不代表未來表現，投資仍有本金損失與市場波動風險。本頁僅供個人紀錄及經驗分享，不構成金融商品之推薦、招攬、投資建議或獲利保證；個別財務規劃應依自身資金用途、風險承受度及適合度獨立評估。</div><p><b>資料與圖表：</b>0050 使用 Yahoo 財經調整後收市價，並以 2026-02-02 = 100 標準化；台股休市日不插值。其他圖表呈現各標的在同一基準下的相對走勢，並非本人投資組合的實際報酬率。</p><p><b>個人紀錄：</b>頁面中的加碼、減碼與策略紀錄，僅為本人於當時所做的紀錄與經驗整理；不代表對任何人、任何標的或任何買賣時點的推薦。</p><p><b>情境比較：</b>僅依特定期間、特定假設及可取得的歷史收盤資料計算；未計入交易成本、稅費、匯率、滑價、各人持有比例與實際執行差異。使用者輸入的金額僅在目前裝置即時計算，不會上傳或儲存。</p></details>
-
 </div>
-
 <div class="modal" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-card" id="modalCard"></div>
 </div>
 <div class="image-viewer" id="imageViewer" role="dialog" aria-modal="true" aria-label="原始紀錄圖片放大檢視">
   <button id="imageViewerClose" aria-label="關閉圖片">×</button><img id="imageViewerImage" alt="">
 </div>
-
 <script>
 const data={"dates":["2026-02-02","2026-02-03","2026-02-04","2026-02-05","2026-02-06","2026-02-09","2026-02-10","2026-02-11","2026-02-12","2026-02-13","2026-02-17","2026-02-18","2026-02-19","2026-02-20","2026-02-23","2026-02-24","2026-02-25","2026-02-26","2026-02-27","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-30","2026-03-31","2026-04-01","2026-04-02","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-13","2026-04-14","2026-04-15","2026-04-16","2026-04-17","2026-04-20","2026-04-21","2026-04-22","2026-04-23","2026-04-24","2026-04-27","2026-04-28","2026-04-29","2026-04-30","2026-05-01","2026-05-04","2026-05-05","2026-05-06","2026-05-07","2026-05-08","2026-05-11","2026-05-12","2026-05-13","2026-05-14","2026-05-15","2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22","2026-05-26","2026-05-27","2026-05-28","2026-05-29","2026-06-01","2026-06-02","2026-06-03","2026-06-04","2026-06-05","2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12","2026-06-15","2026-06-16","2026-06-17","2026-06-18","2026-06-22","2026-06-23","2026-06-24","2026-06-25","2026-06-26","2026-06-29","2026-06-30","2026-07-01","2026-07-02","2026-07-06","2026-07-07","2026-07-08","2026-07-09","2026-07-10","2026-07-13","2026-07-14","2026-07-15","2026-07-16","2026-07-17","2026-07-20","2026-07-21","2026-07-22","2026-07-23","2026-07-24","2026-07-27","2026-07-28","2026-07-29","2026-07-30","2026-07-31","2026-08-03","2026-08-04","2026-08-05","2026-08-06","2026-08-07","2026-08-10","2026-08-11","2026-08-12"],"SOXX":[100,98,93.67,93.8,98.81,100.02,99.64,102.13,99.66,100.56,100.4,101.48,100.89,101.91,101.17,102.65,104.34,101.17,99.89,99.82,94.92,96.84,95.77,91.73,95.37,96.06,96.99,93.62,93.94,95.79,96.47,95.92,96.46,94.28,95.44,96.69,97.89,93.24,91.72,87.84,93.19,95.99,96.29,97.56,98.6,105.02,107.35,109.61,111.53,113.77,113.94,115.1,117.87,118.39,119.28,122.42,125.04,130.88,129.12,124.39,127.59,130.83,132.06,131.01,136.87,143.72,139.6,147.52,151.06,146.3,149.79,150.28,144.18,140.6,140.84,147.53,148.77,152.35,161.64,159.91,161.46,161.35,162.16,171.54,174.57,170.89,153.04,162.03,159.39,153.54,166.42,169.06,178.19,167.64,170.04,181.31,185.72,171.08,170.55,177.27,167.27,174.19,181.68,170.04,160.57,164.88,156.42,159.36,164.93,164.83,156.97,161.03,157.44,150.42,147.95,148.61,156.71,157.51,156.3,149.43,146.37,139.35,131.84,143.05,143.15,143.95,153.74,150.47,150.99,154.04,150.1,151.46,154.98],"QQQ":[100,98.46,96.74,95.35,97.37,98.11,97.66,97.92,95.93,96.13,96.03,96.75,96.38,97.23,96.05,97.08,98.49,97.3,96.99,97.12,96.08,97.54,97.25,95.79,97.06,97.07,97.05,95.39,94.82,95.89,96.35,95.01,94.71,92.96,93.91,93.27,93.88,91.64,89.85,89.16,92.18,93.32,93.43,93.99,94,96.8,97.45,97.59,98.6,100.39,101.8,102.29,103.63,103.3,102.91,104.63,104.04,106.03,106.08,105.02,105.66,106.64,107.67,107.46,108.86,111.12,110.99,113.59,113.92,112.95,114.15,114.96,113.22,112.74,112.04,113.9,114.11,114.6,116.63,116.5,117.48,117.91,118.62,119.17,118.86,118.28,112.6,114.36,113.05,110.79,114.53,115.2,118.82,116.56,115.39,118.28,117.86,113.98,113.49,114.41,112.84,115.64,117.61,115.82,113.81,115.44,113.3,113.62,115.51,115.87,113.67,114.94,114.63,112.74,111.05,111.17,113.23,112.65,110.51,109.28,108.94,107.88,105.68,109.17,109.88,111.81,115.61,114.56,114.14,115.47,115.13,114.74,115.58],"SMH":[100,97.48,93.64,93.41,98.45,99.68,99.21,101.67,99.54,99.94,99.89,101.12,100.55,101.73,101.2,102.74,104.46,100.99,99.61,99.61,95.86,97.83,96.91,93.28,96.67,97.39,98.3,95.14,94.94,96.56,97.28,96.49,96.8,94.31,95.93,96.72,97.81,93.35,91.73,88.86,93.98,96.08,96.16,97.06,98.02,103.66,105.48,107.09,108.67,110.79,111.04,111.48,113.77,113.72,113.9,116.88,118.11,124.14,124.09,120.4,122.46,124.21,124.97,124.22,128.12,134.76,132.39,138.87,141.26,137.57,140.32,141.76,136.37,133.87,133.33,138.41,139.2,141.27,147.59,145.97,147.03,146.81,148.98,154.96,156.36,153.82,139.64,146.62,144.87,139.94,149.39,151.96,158.61,150.99,152.95,161.75,163.96,152.47,151.71,156.11,149.92,154.91,160.77,152.08,145.18,148.12,142.52,145.35,148.96,149.77,143.54,147.15,144.81,139.45,136.41,136.98,143.17,143.86,142.21,137.56,134.46,129.81,123.59,132.09,132.49,133.7,141.12,139.64,140.08,142.83,139.57,140.43,143.35],"SPY":[100,99.15,98.67,97.44,99.31,99.79,99.53,99.5,97.97,98.04,98.19,98.69,98.43,99.14,98.13,98.84,99.68,99.12,98.65,98.7,97.83,98.52,97.97,96.69,97.54,97.38,97.26,95.78,95.24,96.21,96.46,95.11,94.88,93.26,94.24,93.93,94.45,92.76,91.18,90.88,93.52,94.22,94.31,94.75,94.8,97.21,97.77,97.71,98.66,99.86,100.65,100.9,102.12,101.91,101.25,102.27,101.88,102.66,102.84,102.34,102.33,103.34,103.63,103.25,104.08,105.52,105.2,106.07,106.31,106.15,106.74,107.59,106.29,106.22,105.51,106.59,106.8,107.22,107.93,107.92,108.51,108.78,109.08,109.23,108.46,108.87,106.06,106.3,105.99,104.32,106.09,106.66,108.54,107.9,106.55,107.38,107.04,105.49,105.44,105.59,104.83,106.56,107.39,107.24,107.1,108.03,107.52,107.19,108.1,108.56,107.73,108.11,108.54,107.95,106.89,106.71,107.6,107.48,106.15,106.26,106.28,106.54,104.9,106.66,107.42,108.95,110.92,110.7,110.52,111.19,111.16,110.81,111.08],"events":[{"date":"2026-02-24","displayDate":"2026-02-24","type":"減碼","note":"小幅減少台灣相關部位，部分資金轉回較防禦性的配置。","color":"#E05050","evidence":"2026-02-24.jpg"},{"date":"2026-03-03","displayDate":"2026-03-03","type":"加碼","note":"分批、少量買回 SOXX、QQQ；當時 SOXX 自高點修正約一成。","color":"#52C8A0","evidence":"2026-03-03.jpg"},{"date":"2026-03-20","displayDate":"2026-03-21","type":"加碼","note":"原始紀錄日期為 3/21；減碼部分短債約一成，分批少量增加 QQQ、SOXX。市場標線對應最近交易日 3/20。","color":"#52C8A0","evidence":"2026-03-21.jpg"},{"date":"2026-03-27","displayDate":"2026-03-27","type":"加碼","note":"降低防禦資產、轉往美國大盤，同時分批配置台灣大盤；投資型保單加碼 QQQ 與台灣科技相關標的。","color":"#52C8A0","evidence":"2026-03-27.jpg"},{"date":"2026-04-02","displayDate":"2026-04-02","type":"策略紀錄","note":"若未來幾週出現較大幅度修正，考慮動用約 20–25% 防禦性資產，以分批、小額方式配置回風險資產。","color":"#6FA8DC","evidence":"2026-04-02.jpg"},{"date":"2026-04-14","displayDate":"2026-04-14","type":"停止加碼","note":"風險資產反彈速度過快，停止以防禦性資產加碼買入，回歸定期定額。","color":"#E07848","evidence":"2026-04-14.jpg"},{"date":"2026-04-20","displayDate":"2026-04-20","type":"策略紀錄","note":"不追高、不預設高點，持有現有風險資產部位；防禦性資產先保留，持續等待更好的介入機會。","color":"#9AA6A0","evidence":"2026-04-20.jpg"},{"date":"2026-07-17","displayDate":"2026-07-17","type":"策略紀錄","note":"條件式加碼計畫：若後續持續破底，將分批加碼美股半導體 ETF，首波約 10%，並重新加入短債部位。","color":"#6FA8DC","evidence":"2026-07-17.jpg"},{"date":"2026-07-24","displayDate":"2026-07-24","type":"防禦調整","note":"在定期定額中增加短債配置，提升防禦性資產部位；不預設市場走向。","color":"#D4B35A","evidence":"2026-07-24.jpg"},{"date":"2026-07-28","displayDate":"2026-07-28","type":"加碼","note":"跌幅達 4–5% 以上時擴大扣款力度，買入大盤及科技相關大盤 ETF；短債資金分 5–6 等份，以金字塔方式加碼。","color":"#52C8A0","evidence":"2026-07-28.jpg"}],"0050":[100.0,102.03,101.96,100.69,100.56,103.42,105.59,107.96,null,null,null,null,null,null,108.25,111.05,113.42,113.49,null,112.37,110.13,105.73,108.25,107.49,102.93,105.18,109.37,107.13,106.22,105.73,107.2,108.81,106.29,106.15,103.84,104.05,106.57,106.01,104.9,103.35,101.18,105.52,103.42,null,105.3,110.76,110.69,112.93,112.72,116.22,117.69,118.88,117.69,118.25,120.28,120.77,120.77,125.81,130.07,128.66,126.92,126.57,null,132.31,132.31,133.91,136.64,135.65,135.51,135.44,133.56,134.33,133.42,132.73,130.21,129.37,134.05,136.08,139.99,143.42,140.55,147.4,147.54,147.83,150.49,148.39,145.66,141.18,144.74,140.2,null,142.58,147.19,148.11,148.25,150.06,155.45,153.97,149.85,149.92,144.2,146.08,150.77,152.93,152.16,151.4,148.53,148.32,147.97,147.97,148.25,146.01,148.67,null,140.06,138.74,144.22,146.12,146.19,143.1,142.75,136.7,131.84,131.56,144.72,143.52,141.62,146.05,145.35,144.72,146.69,147.18,148.02]};
 const C={SOXX:'#4CAF50',QQQ:'#2196F3',SMH:'#FF9800',SPY:'#9C27B0','0050':'#E0B84A','安聯台灣科技基金':'#D81B60'};
@@ -113,17 +111,14 @@ let visible=new Set(isMobile()?['SOXX','QQQ','0050']:Object.keys(C)), range='ALL
 const chartEventTypes=new Set(['加碼','減碼']);
 const chartEvents=data.events.filter(e=>chartEventTypes.has(e.type));
 const railEvents=data.events.filter(e=>e.type!=='停止加碼');
-
 const svg=document.getElementById('chart');
 const wrap=document.getElementById('chartWrap');
 const tip=document.getElementById('tip');
-
 function el(tag,a={}){
   const n=document.createElementNS('http://www.w3.org/2000/svg',tag);
   Object.entries(a).forEach(([k,v])=>n.setAttribute(k,v));
   return n;
 }
-
 function buttons(){
   const b=document.getElementById('seriesBtns');
   Object.keys(C).forEach(k=>{
@@ -164,7 +159,6 @@ function syncSeriesButton(button,key){
 function updateSelectionCount(){
   document.getElementById('selectionCount').textContent=`已選 ${visible.size}／${Object.keys(C).length}`;
 }
-
 function money(v){return `NT$${Math.round(v).toLocaleString('en-US')}`}
 function priceIndex(key,date,after=false){
   let i=data.dates.findIndex(d=>d>=date);
@@ -240,19 +234,15 @@ function setupSimulation(){
   });
   updateSimulation();
 }
-
 function idxs(){
   const n=data.dates.length;
   if(range==='ALL') return [0,n-1];
   const days={'1M':22,'3M':66,'6M':132}[range];
   return [Math.max(0,n-days),n-1];
 }
-
 function validVals(arr,a,z){
   return arr.slice(a,z+1).filter(v=>Number.isFinite(v));
 }
-
-
 function firstFiniteIndex(k,a,z){
   for(let i=a;i<=z;i++) if(Number.isFinite(data[k][i])) return i;
   return -1;
@@ -293,11 +283,9 @@ function updateAnalytics(){
     </div>`;
   }).join('');
 }
-
 function drawdownFromPriorHigh(k,i){
   const eventValue=data[k][i];
   if(!Number.isFinite(eventValue)) return null;
-
   let peakValue=null, peakIndex=-1;
   for(let j=0;j<i;j++){
     const v=data[k][j];
@@ -306,19 +294,16 @@ function drawdownFromPriorHigh(k,i){
       peakIndex=j;
     }
   }
-
   if(peakValue===null){
     peakValue=eventValue;
     peakIndex=i;
   }
-
   return {
     dd:(eventValue/peakValue-1)*100,
     peakValue,
     peakDate:data.dates[peakIndex]
   };
 }
-
 function marketSnapshotAt(date,compact=false){
   let i=data.dates.indexOf(date);
   if(i<0){
@@ -330,7 +315,6 @@ function marketSnapshotAt(date,compact=false){
     });
     i=best;
   }
-
   const keys=compact?['SOXX','QQQ','0050']:Object.keys(C);
   return keys.map(k=>{
     const v=data[k][i];
@@ -341,25 +325,20 @@ function marketSnapshotAt(date,compact=false){
     return `<span style="color:${C[k]}">${k}</span>：<span style="color:#c43d3d;font-weight:800">距 ${peakLabel} 前高 ${signed(snap.dd)}</span>`;
   }).join('｜');
 }
-
 function draw(){
   svg.innerHTML='';
   const W=wrap.clientWidth,H=wrap.clientHeight,p={l:44,r:12,t:24,b:42};
   const [a,z]=idxs();
-
   let ys=[];
   visible.forEach(k=>ys.push(...validVals(data[k],a,z)));
   if(!ys.length) ys=[100];
-
   // Y 軸：以 100 為基準，固定每 10 一階。
   let rawMin=Math.min(...ys), rawMax=Math.max(...ys);
   let ymin=Math.floor(Math.min(rawMin,100)/10)*10;
   let ymax=Math.ceil(Math.max(rawMax,100)/10)*10;
   if(ymin===ymax){ ymin-=10; ymax+=10; }
-
   const X=i=>p.l+(i-a)/Math.max(1,(z-a))*(W-p.l-p.r);
   const Y=v=>p.t+(ymax-v)/(ymax-ymin)*(H-p.t-p.b);
-
   // 水平格線與 Y 軸刻度，每 10 一階；100 強調。
   for(let v=ymin;v<=ymax;v+=10){
     const y=Y(v);
@@ -377,7 +356,6 @@ function draw(){
     t.textContent=v;
     svg.appendChild(t);
   }
-
   // X 軸月份：標在當月第一個可見交易日。
   let lastMonth='';
   for(let i=a;i<=z;i++){
@@ -398,7 +376,6 @@ function draw(){
       lastMonth=month;
     }
   }
-
   visible.forEach(k=>{
     const pts=[];
     for(let i=a;i<=z;i++){
@@ -416,7 +393,6 @@ function draw(){
       }));
     }
   });
-
   // 主圖只留下真正執行的加碼／減碼，避免策略紀錄造成視覺干擾。
   chartEvents.forEach(e=>{
     let i=data.dates.indexOf(e.date);
@@ -434,13 +410,11 @@ function draw(){
     svg.appendChild(el('line',{x1:x,x2:x,y1:p.t,y2:H-p.b,stroke:e.color,'stroke-width':1.2,'stroke-dasharray':'4 4'}));
     svg.appendChild(el('circle',{cx:x,cy:p.t+8,r:6,fill:e.color,stroke:'#fff','stroke-width':1.5}));
   });
-
   const cross=el('line',{id:'cross',x1:0,x2:0,y1:p.t,y2:H-p.b,stroke:'#4a936f','stroke-width':1,'stroke-dasharray':'3 3',visibility:'hidden'});
   svg.appendChild(cross);
   svg.dataset.a=a;svg.dataset.z=z;svg.dataset.pl=p.l;svg.dataset.pr=p.r;
   updateAnalytics();
 }
-
 function inspect(clientX){
   const rect=wrap.getBoundingClientRect(),x=clientX-rect.left,W=wrap.clientWidth;
   const a=+svg.dataset.a,z=+svg.dataset.z,pl=+svg.dataset.pl,pr=+svg.dataset.pr;
@@ -450,33 +424,27 @@ function inspect(clientX){
   const cx=pl+(i-a)/Math.max(1,(z-a))*(W-pl-pr);
   const cross=svg.querySelector('#cross');
   cross.setAttribute('x1',cx);cross.setAttribute('x2',cx);cross.setAttribute('visibility','visible');
-
   const ev=chartEvents.find(e=>e.date===data.dates[i]);
   const compact=window.matchMedia('(max-width: 600px)').matches;
-
   const rows=[...visible].map(k=>{
     const v=data[k][i];
     if(!Number.isFinite(v)){
       return `<div><span style="color:${C[k]}">●</span> ${k}：<b>—</b></div>`;
     }
-
     if(ev){
       const snap=drawdownFromPriorHigh(k,i);
       const peakLabel=snap ? snap.peakDate.slice(5).replace('-','/') : '';
       const dd=snap ? snap.dd : null;
       return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:#c43d3d;font-weight:800">｜距 ${peakLabel} 前高 ${signed(dd)}</span></div>`;
     }
-
     return `<div><span style="color:${C[k]}">●</span> ${k}：<b>${v.toFixed(2)}</b> <span style="color:${v>=100?'#19724e':'#c43d3d'}">(${signed(v-100)})</span></div>`;
   }).join('');
-
   tip.innerHTML=`<b>${ev?(ev.displayDate||ev.date):data.dates[i]}</b>${rows}${ev?`<hr style="border-color:#d6e3dc"><div style="color:${ev.color}"><b>${ev.type}</b>${compact?'':`｜${ev.note}`}</div>`:''}`;
   tip.style.display='block';
   const left=compact ? 8 : Math.min(Math.max(6,cx+10),W-tip.offsetWidth-6);
   const top=compact ? Math.max(8,wrap.clientHeight-tip.offsetHeight-8) : 38;
   tip.style.left=left+'px'; tip.style.top=top+'px';
 }
-
 wrap.addEventListener('mousemove',e=>inspect(e.clientX));
 wrap.addEventListener('mouseleave',()=>{
   tip.style.display='none';
@@ -485,11 +453,9 @@ wrap.addEventListener('mouseleave',()=>{
 });
 wrap.addEventListener('touchstart',e=>inspect(e.touches[0].clientX),{passive:true});
 wrap.addEventListener('touchmove',e=>inspect(e.touches[0].clientX),{passive:true});
-
 function legend(){
   document.getElementById('legend').innerHTML=Object.keys(C).map(k=>`<span><i class="dot" style="background:${C[k]}"></i>${k}</span>`).join('');
 }
-
 function renderEventRail(){
   document.getElementById('eventRail').innerHTML=railEvents.map(e=>{
     const klass=e.type==='減碼'?'sell':e.type==='加碼'?'add':'strategy';
@@ -501,7 +467,6 @@ function renderEventRail(){
     openEventModal(b.dataset.date);
   }));
 }
-
 function openEventModal(date){
   const e=data.events.find(x=>x.date===date);
   if(!e) return;
@@ -541,7 +506,6 @@ document.getElementById('modalCard').addEventListener('click',e=>{
 document.getElementById('imageViewerClose').addEventListener('click',closeImageViewer);
 document.getElementById('imageViewer').addEventListener('click',e=>{if(e.target.id==='imageViewer')closeImageViewer()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeImageViewer();closeEventModal()}});
-
 function focusEvent(date){
   const i=data.dates.indexOf(date);
   if(i<0) return;
@@ -554,16 +518,23 @@ function focusEvent(date){
   const x=wrap.getBoundingClientRect().left+pl+(i-a)/Math.max(1,z-a)*(W-pl-pr);
   inspect(x);
 }
-
 function setupGuidedNav(){
   document.querySelectorAll('[data-guide-target]').forEach(button=>button.addEventListener('click',()=>{
     const target=document.getElementById(button.dataset.guideTarget);
     if(!target) return;
     const wasGated=document.body.classList.contains('guide-gated');
+    const wasRestricted=document.body.classList.contains('guide-gated');
     document.body.classList.remove('guide-gated');
+    document.body.classList.remove('guide-focus-market','guide-focus-timeline','guide-focus-simulation');
+    const focus={marketSection:'market',timelineSection:'timeline',simulation:'simulation'}[button.dataset.guideTarget];
+    document.body.classList.add(`guide-focus-${focus}`);
     document.getElementById('quickStartTitle').textContent='導覽入口｜可隨時點選想看的內容';
     document.getElementById('quickStartSub').textContent='完整內容已開啟；每個區塊都有對應的操作提示';
     document.getElementById('guideStatus').textContent='已開啟完整內容，點其他按鈕可快速前往對應區塊。';
+    document.getElementById('quickStartTitle').textContent='導覽模式｜目前只顯示你選擇的內容';
+    document.getElementById('quickStartSub').textContent='點其他步驟可切換內容；要一次看全部可按下方按鈕';
+    document.getElementById('guideStatus').textContent='已開啟對應區塊。';
+    document.getElementById('showAllGuides').hidden=false;
     if(target.tagName==='DETAILS') target.open=true;
     const go=()=>{
       draw();
@@ -573,9 +544,17 @@ function setupGuidedNav(){
       window.setTimeout(()=>target.classList.remove('guide-highlight'),2500);
     };
     if(wasGated) requestAnimationFrame(go); else go();
+    if(wasRestricted) requestAnimationFrame(go); else requestAnimationFrame(go);
   }));
+  document.getElementById('showAllGuides').addEventListener('click',()=>{
+    document.body.classList.remove('guide-gated','guide-focus-market','guide-focus-timeline','guide-focus-simulation');
+    document.getElementById('quickStartTitle').textContent='導覽入口｜完整內容已顯示';
+    document.getElementById('quickStartSub').textContent='可隨時點選上方按鈕，回到單一導覽內容';
+    document.getElementById('guideStatus').textContent='完整內容已開啟。';
+    document.getElementById('showAllGuides').hidden=true;
+    requestAnimationFrame(draw);
+  });
 }
-
 buttons();updateSelectionCount();legend();renderEventRail();setupSimulation();setupGuidedNav();draw();
 window.addEventListener('resize',draw);
 </script>
